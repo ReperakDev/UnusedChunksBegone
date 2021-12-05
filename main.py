@@ -212,15 +212,13 @@ if __name__ == "__main__":
         settings["output_dir"] = sys.argv[sys.argv.index("-output") + 1]
 
     # Ensure it's a directory
-    if not settings["input_dir"].endswith("/") or not settings["input_dir"].endswith(
-        "\\"
-    ):
+    # fmt: off
+    if not settings["input_dir"].endswith("/") or not settings["input_dir"].endswith("\\"):
         settings["input_dir"] += "/"
 
     # Ensure it's a directory
-    if not settings["output_dir"].endswith("/") or not settings["output_dir"].endswith(
-        "\\"
-    ):
+    # fmt: off
+    if not settings["output_dir"].endswith("/") or not settings["output_dir"].endswith("\\"):
         settings["output_dir"] += "/"
 
     # Ensure the directory exists
@@ -256,7 +254,8 @@ if __name__ == "__main__":
             # if it's a mca file...
             if item.path.endswith(".mca") and item.is_file():
                 # Extract the region coordinates from the file name
-                region_coords = re.findall(r"r\.(-?\d+)\.(-?\d+)\.mca", item.name)[0]
+                # fmt: off
+                region_coords = re.findall(r'r\.(-?\d+)\.(-?\d+)\.mca', item.name)[0]
                 if region_coords:
                     region_coords_list.append(region_coords)
         pool.map(worker, region_coords_list)
